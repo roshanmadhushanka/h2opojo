@@ -7,24 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a8b4e57-1b60-4b4f-a8cd-dd7758bf93a7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/model/models.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/BinomialPrediction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/PredictStreamProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/BinomialPredictionTestCase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/PredictStreamProcessorTestCase.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/h2opojo.siddhiext" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/org/wso2/carbon/ml/siddhi/extension/h2opojo/RegressionStreamProcessor.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/RegressionStreamProcessor.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/RegressionPrediction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/h2opojo.siddhiext" afterPath="$PROJECT_DIR$/src/main/resources/h2oml.siddhiext" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/RegressionStreamProcessorTestCase.java" afterPath="$PROJECT_DIR$/src/test/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/RegressionPredictionTestCase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/h2opojo_jar/h2opojo.jar" afterPath="$PROJECT_DIR$/out/artifacts/h2opojo_jar/h2opojo.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Test.class" afterPath="$PROJECT_DIR$/target/classes/Test.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/wso2/carbon/ml/siddhi/extension/h2opojo/ModelHandler.class" afterPath="$PROJECT_DIR$/target/classes/org/wso2/carbon/ml/siddhi/extension/h2opojo/ModelHandler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/h2opojo.iml" afterPath="$PROJECT_DIR$/h2opojo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Test.java" afterPath="$PROJECT_DIR$/src/main/java/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/ModelHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/carbon/ml/siddhi/extension/h2opojo/ModelHandler.java" />
     </list>
     <ignored path="h2opojo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -787,6 +770,14 @@
       <option name="presentableId" value="Default" />
       <updated>1478279406482</updated>
     </task>
+    <task id="LOCAL-00001" summary="Predictio Stream Processor completed">
+      <created>1478509995122</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1478509995122</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -871,6 +862,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Predictio Stream Processor completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Predictio Stream Processor completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
