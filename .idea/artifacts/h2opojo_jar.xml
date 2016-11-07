@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="h2opojo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/h2opojo_jar</output-path>
+    <root id="archive" name="h2opojo.jar">
+      <element id="module-output" name="h2opojo" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ai/h2o/deepwater-backend-api/1.0.2/deepwater-backend-api-1.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/wso2/siddhi/siddhi-query-api/3.1.2/siddhi-query-api-3.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/wso2/siddhi/siddhi-core/3.1.2/siddhi-core-3.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../h2o-pojo-siddhi/out/artifacts/h2o_pojo_siddhi_jar/h2o-pojo-siddhi.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/guava/guava/19.0/guava-19.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ai/h2o/h2o-genmodel/3.10.0.9/h2o-genmodel-3.10.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
