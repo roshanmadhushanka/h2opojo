@@ -59,6 +59,19 @@ public class ModelHandler {
         return model.predictRegression(row).value;
     }
 
+    public Object binomialPredict(Object[] data) throws PredictException {
+        //For multinomial classification applications
+        System.out.println(Arrays.asList(column_names));
+        System.out.println(column_names.length);
+        System.out.println(Arrays.asList(data));
+        System.out.println(data.length);
+        RowData row = new RowData();
+        for(int i=0; i<data.length; i++){
+            row.put(column_names[i], data[i].toString());
+        }
+        return model.predictBinomial(row).label;
+    }
+
     public Object multinomialPredict(Object[] data) throws PredictException {
         //For multinomial classification applications
         RowData row = new RowData();

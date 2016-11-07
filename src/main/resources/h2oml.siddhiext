@@ -1,0 +1,3 @@
+regression=org.wso2.carbon.ml.siddhi.extension.h2opojo.RegressionPrediction
+predict=org.wso2.carbon.ml.siddhi.extension.h2opojo.PredictStreamProcessor
+binomial=org.wso2.carbon.ml.siddhi.extension.h2opojo.BinomialPrediction

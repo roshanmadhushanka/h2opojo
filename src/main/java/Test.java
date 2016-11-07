@@ -31,5 +31,7 @@ public class Test {
         }
         endTime = System.nanoTime();
         System.out.println("Took "+(endTime - startTime)/10.0 + " ns");
+
+
     }
 }
