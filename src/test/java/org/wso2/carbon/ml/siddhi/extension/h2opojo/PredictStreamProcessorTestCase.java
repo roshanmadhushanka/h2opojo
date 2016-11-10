@@ -17,7 +17,8 @@ import java.net.URISyntaxException;
  */
 public class PredictStreamProcessorTestCase {
     private volatile boolean eventArrived;
-    private String modelClassPath = "DeepLearning_model_python_1478324086305_1";
+    private String modelPath;
+    private final String PROJECT_HOME = System.getProperty("user.dir");
 
     @Before
     public void init() {
@@ -25,50 +26,14 @@ public class PredictStreamProcessorTestCase {
     }
 
     @Test
-    public void regressionPredictionTest() throws InterruptedException, URISyntaxException {
-
-        modelClassPath = "DeepLearning_model_python_1478324086305_1";
-        SiddhiManager siddhiManager = new SiddhiManager();
-
-        String inputStream = "define stream InputStream "
-                + "(Setting1 double, Setting2 double, Time double, UnitNumber double, mas11 double, mas12 double, mas13 double, mas15 double, mas2 double, mas20 double, mas21 double, mas3 double, mas4 double, mas5 double, mas8 double, msd14 double, msd9 double);";
-
-        String query = "@info(name = 'query1') " + "from InputStream#h2oml:regression('" + modelClassPath
-                + "') " + "select * " + "insert into outputStream ;";
-
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inputStream + query);
-
-        executionPlanRuntime.addCallback("query1", new QueryCallback() {
-
-            @Override
-            public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
-                EventPrinter.print(timeStamp, inEvents, removeEvents);
-                if (inEvents != null) {
-                    Assert.assertEquals(115.99388551714453, inEvents[0].getData(17));
-                    eventArrived = true;
-                }
-            }
-        });
-
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("InputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[] {0.0018, -0.0001, 49.0, 2.0, 47.506, 521.596, 2388.102, 8.44226, 642.672, 38.902, 23.27434, 1588.342, 1406.778, 553.748, 2388.108, 1.94949839702, 3.16007420799});
-        sleepTillArrive(20000);
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
-        siddhiManager.shutdown();
-    }
-
-    @Test
     public void binomialPredictionTest() throws InterruptedException, URISyntaxException {
-
-        modelClassPath = "DRF_model_python_1478508251265_1";
+        modelPath = PROJECT_HOME + "/model/DRF_model_python_1478682616811_1";
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inputStream = "define stream InputStream "
                 + "(sepal_length double, sepal_width double, petal_length double, petal_width double);";
 
-        String query = "@info(name = 'query1') " + "from InputStream#h2oml:predict('" + modelClassPath
+        String query = "@info(name = 'query1') " + "from InputStream#h2opojo:predict('" + modelPath
                 + "') " + "select * " + "insert into outputStream ;";
 
         ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inputStream + query);
