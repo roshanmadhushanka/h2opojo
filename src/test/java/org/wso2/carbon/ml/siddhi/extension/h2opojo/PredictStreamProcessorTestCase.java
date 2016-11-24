@@ -78,7 +78,7 @@ public class PredictStreamProcessorTestCase {
             public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 if (inEvents != null) {
-                    Assert.assertEquals(482.54533464519204, inEvents[0].getData(4));
+                    Assert.assertEquals("482.54533464519204", inEvents[0].getData(4));
                     eventArrived = true;
                 }
             }

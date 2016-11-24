@@ -36,7 +36,7 @@ public class PredictStreamProcessor extends StreamProcessor{
             if(data.length != 0){
                 try {
                     Object prediction = modelHandler.predict(featureValues);
-                    complexEventPopulater.populateComplexEvent(event, new Object[]{prediction});
+                    complexEventPopulater.populateComplexEvent(event, new Object[]{ String.valueOf(prediction) });
                 } catch (PredictException e) {
                     throw new ExecutionPlanRuntimeException("Error while predicting", e);
                 }
