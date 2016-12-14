@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package org.wso2.carbon.ml.siddhi.extension.h2opojo;
 
 import hex.genmodel.easy.exception.PredictException;
@@ -14,15 +32,11 @@ import org.wso2.siddhi.core.query.processor.stream.StreamProcessor;
 import org.wso2.siddhi.query.api.definition.AbstractDefinition;
 import org.wso2.siddhi.query.api.definition.Attribute;
 import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by wso2123 on 11/7/16.
- */
 public class PredictStreamProcessor extends StreamProcessor{
     private ModelHandler modelHandler;
 
@@ -51,16 +65,16 @@ public class PredictStreamProcessor extends StreamProcessor{
             throw new ExecutionPlanValidationException("H2O model class path is not defined");
         }
 
-        //Model class path
+        // Model path
         String classPath;
         if (attributeExpressionExecutors[0] instanceof ConstantExpressionExecutor){
             Object constatObj = ((ConstantExpressionExecutor) attributeExpressionExecutors[0]).getValue();
             classPath = (String) constatObj;
         } else {
-            throw new ExecutionPlanValidationException("H2O model class path is not defined");
+            throw new ExecutionPlanValidationException("H2O model path is not defined");
         }
 
-        //Define model
+        // Define model
         try {
             modelHandler = new ModelHandler(classPath);
         } catch (ClassNotFoundException e) {
@@ -73,7 +87,8 @@ public class PredictStreamProcessor extends StreamProcessor{
             e.printStackTrace();
         }
 
-        return Arrays.asList(new Attribute("prediction", Attribute.Type.STRING));
+        //return Arrays.asList(new Attribute("prediction", Attribute.Type.STRING));
+        return Collections.singletonList(new Attribute("prediction", Attribute.Type.STRING));
     }
 
     @Override
