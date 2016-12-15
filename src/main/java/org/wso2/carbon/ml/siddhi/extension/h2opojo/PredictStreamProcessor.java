@@ -71,7 +71,7 @@ public class PredictStreamProcessor extends StreamProcessor{
             Object constatObj = ((ConstantExpressionExecutor) attributeExpressionExecutors[0]).getValue();
             classPath = (String) constatObj;
         } else {
-            throw new ExecutionPlanValidationException("H2O model path is not defined");
+            throw new ExecutionPlanValidationException("H2O model is not valid");
         }
 
         // Define model
