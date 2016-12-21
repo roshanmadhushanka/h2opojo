@@ -22,6 +22,7 @@ import hex.ModelCategory;
 import hex.genmodel.easy.EasyPredictModelWrapper;
 import hex.genmodel.easy.RowData;
 import hex.genmodel.easy.exception.PredictException;
+import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,23 +30,32 @@ import java.net.URLClassLoader;
 
 public class ModelHandler {
     private EasyPredictModelWrapper model;
-    private String[] column_names;
+    private String modelName;
+    private String[] featureNames;  // Features in model
     private final String H2O_GENMODEL_PATH = "/repository/components/lib/h2o-genmodel.jar";
 
     public ModelHandler(String modelStorageLoc) throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, IOException {
 
-        String modelName = extractModelName(modelStorageLoc);
+        this.modelName = extractModelName(modelStorageLoc);
 
+        // Define model class loader
         File f = new File(modelStorageLoc);
         URL[] cp = { f.toURI().toURL(), new File(H2O_GENMODEL_PATH).toURI().toURL() };
         URLClassLoader urlcl = new URLClassLoader(cp, this.getClass().getClassLoader());
 
-        hex.genmodel.GenModel rawModel = (hex.genmodel.GenModel)
-                urlcl.loadClass(modelName).newInstance();
+        // Instantiate model
+        hex.genmodel.GenModel rawModel;
+        try{
+            rawModel = (hex.genmodel.GenModel)
+                    urlcl.loadClass(modelName).newInstance();
+        } catch (ClassNotFoundException e) {
+            throw new ExecutionPlanValidationException("Model : " + modelName + " does not exist");
+        }
+
 
         this.model = new EasyPredictModelWrapper(rawModel);
-        this.column_names = rawModel._names;
+        this.featureNames = rawModel._names;
     }
 
     public Object predict(Object[] data) throws PredictException {
@@ -53,7 +63,7 @@ public class ModelHandler {
         // Generate input data row
         RowData row = new RowData();
         for(int i=0; i<data.length; i++){
-            row.put(column_names[i], data[i].toString());
+            row.put(featureNames[i], data[i].toString());
         }
 
         // Select specific model
@@ -75,9 +85,23 @@ public class ModelHandler {
     }
 
     private String extractModelName(String modelStoragePath) {
-        // Extract the model name from the given path
+        // Extract the model name from a given path
         int index = modelStoragePath.lastIndexOf(File.separator);
         return modelStoragePath.substring(index + 1);
     }
+
+    public String getModelName(){
+        return this.modelName;
+    }
+
+    public EasyPredictModelWrapper getModel(){
+        return this.model;
+    }
+
+    public String[] getFeatureNames(){
+        return this.featureNames;
+    }
+
+
 }
 

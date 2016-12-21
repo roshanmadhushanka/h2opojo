@@ -109,6 +109,40 @@ public class PredictStreamProcessorTestCase {
         siddhiManager.shutdown();
     }
 
+    @Test
+    public void attributeSelectionTest() throws InterruptedException, URISyntaxException {
+        modelPath = PROJECT_HOME + "/src/test/model/DeepLearning_model_python_1478750840781_1";
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inputStream = "define stream InputStream "
+                + "(temperature double, vacuum double, pressure double, s1 double, humidity double, s2 double);";
+
+        String query = "@info(name = 'query1') " + "from InputStream#h2opojo:predict('" + modelPath
+                + "', 'AT', 'V', 'AP', 's1', 'RH', 's2') " + "select * " + "insert into outputStream ;";
+
+        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inputStream + query);
+
+        executionPlanRuntime.addCallback("query1", new QueryCallback() {
+
+            @Override
+            public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
+                EventPrinter.print(timeStamp, inEvents, removeEvents);
+                if (inEvents != null) {
+                    Assert.assertEquals("482.54533464519204", inEvents[0].getData(6));
+                    eventArrived = true;
+                }
+            }
+        });
+
+        InputHandler inputHandler = executionPlanRuntime.getInputHandler("InputStream");
+        executionPlanRuntime.start();
+        inputHandler.send(new Object[] {8.34, 40.77, 1010.84, 10.5, 90.01, 23.5});
+        sleepTillArrive(20000);
+        Assert.assertTrue(eventArrived);
+        executionPlanRuntime.shutdown();
+        siddhiManager.shutdown();
+    }
+
     private void sleepTillArrive(int milliseconds) {
         int totalTime = 0;
         while (!eventArrived && totalTime < milliseconds) {
